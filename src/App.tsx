@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import parseLLMJson from './utils/jsonParser'
 
 interface FortuneResponse {
@@ -22,6 +22,19 @@ function App() {
   const [fortune, setFortune] = useState<string>('')
   const [isLoading, setIsLoading] = useState(false)
   const [showFortune, setShowFortune] = useState(false)
+  const [floatingIcons, setFloatingIcons] = useState<Array<{ id: number; x: number; y: number; icon: string; delay: number }>>([])
+
+  useEffect(() => {
+    const kittyEmojis = ['😸', '😺', '😻', '🐱', '🐈', '🎀', '💖', '✨', '🌸', '🧸']
+    const icons = Array.from({ length: 15 }, (_, i) => ({
+      id: i,
+      x: Math.random() * window.innerWidth,
+      y: Math.random() * window.innerHeight,
+      icon: kittyEmojis[Math.floor(Math.random() * kittyEmojis.length)],
+      delay: Math.random() * 2
+    }))
+    setFloatingIcons(icons)
+  }, [])
 
   const generateRandomId = () => Math.random().toString(36).substring(7)
 
@@ -83,8 +96,30 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-200 via-pink-300 to-pink-400 flex items-center justify-center relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-pink-300/50 to-pink-500/50" />
+    <div className="min-h-screen bg-gradient-to-br from-pink-200 via-rose-200 to-pink-300 flex items-center justify-center relative overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-br from-pink-300/40 to-rose-300/40">
+        <div className="absolute inset-0 opacity-30">
+          <div className="absolute top-1/4 left-1/4 text-6xl transform rotate-12">💖</div>
+          <div className="absolute top-3/4 right-1/4 text-5xl transform -rotate-12">🌸</div>
+          <div className="absolute top-1/2 left-1/6 text-4xl transform rotate-45">✨</div>
+          <div className="absolute bottom-1/4 left-1/3 text-5xl transform -rotate-45">🎀</div>
+          <div className="absolute top-1/3 right-1/6 text-4xl transform rotate-12">🧸</div>
+          {floatingIcons.map((icon) => (
+            <div
+              key={icon.id}
+              className="absolute text-3xl animate-bounce"
+              style={{
+                left: icon.x,
+                top: icon.y,
+                animationDelay: `${icon.delay}s`,
+                animationDuration: '3s'
+              }}
+            >
+              {icon.icon}
+            </div>
+          ))}
+        </div>
+      </div>
 
       {!showFortune ? (
         <div className="relative z-10 flex flex-col items-center justify-center space-y-16">
@@ -92,8 +127,8 @@ function App() {
             <h1 className="text-5xl font-bold text-gray-800 mb-4 font-sans">
               Choose Your Path
             </h1>
-            <p className="text-gray-700 text-lg max-w-md">
-              Red reveals truth, blue offers comfort. Which will you choose?
+            <p className="text-gray-700 text-lg max-w-md flex items-center justify-center gap-2">
+              🌸 Red reveals truth, blue offers comfort. Which will you choose? 🌸
             </p>
           </div>
 
@@ -146,8 +181,8 @@ function App() {
           </div>
 
           {isLoading && (
-            <div className="text-gray-600 text-sm">
-              The oracle contemplates your choice...
+            <div className="text-gray-600 text-sm flex items-center gap-2">
+              🎀 The oracle contemplates your choice... 🎀
             </div>
           )}
         </div>
