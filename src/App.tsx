@@ -83,8 +83,16 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#0F1923] to-[#1A2634] flex items-center justify-center relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-[#0F1923]/50 to-[#1A2634]/50" />
+    <div
+      className="min-h-screen flex items-center justify-center relative overflow-hidden"
+      style={{
+        backgroundImage: `url('https://png.pngtree.com/thumb_back/fh260/background/20240705/pngtree-aesthetic-hello-kitty-background-design-for-mother-s-day-celebrations-image_15922406.jpg')`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat'
+      }}
+    >
+      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
 
       {!showFortune ? (
         <div className="relative z-10 flex flex-col items-center justify-center space-y-16">
