@@ -83,24 +83,16 @@ function App() {
   }
 
   return (
-    <div
-      className="min-h-screen flex items-center justify-center relative overflow-hidden"
-      style={{
-        backgroundImage: `url('https://png.pngtree.com/thumb_back/fh260/background/20240705/pngtree-aesthetic-hello-kitty-background-design-for-mother-s-day-celebrations-image_15922406.jpg')`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat'
-      }}
-    >
-      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
+    <div className="min-h-screen bg-gradient-to-br from-pink-200 via-pink-300 to-pink-400 flex items-center justify-center relative overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-br from-pink-300/50 to-pink-500/50" />
 
       {!showFortune ? (
         <div className="relative z-10 flex flex-col items-center justify-center space-y-16">
           <div className="text-center mb-8">
-            <h1 className="text-5xl font-bold text-[#F9F9F9] mb-4 font-sans">
+            <h1 className="text-5xl font-bold text-gray-800 mb-4 font-sans">
               Choose Your Path
             </h1>
-            <p className="text-[#F9F9F9]/80 text-lg max-w-md">
+            <p className="text-gray-700 text-lg max-w-md">
               Red reveals truth, blue offers comfort. Which will you choose?
             </p>
           </div>
@@ -154,7 +146,7 @@ function App() {
           </div>
 
           {isLoading && (
-            <div className="text-[#F9F9F9]/60 text-sm">
+            <div className="text-gray-600 text-sm">
               The oracle contemplates your choice...
             </div>
           )}
@@ -191,7 +183,7 @@ function App() {
                 </span>
               </div>
 
-              <p className="text-[#F9F9F9] text-lg leading-relaxed mb-6 font-sans">
+              <p className="text-gray-800 text-lg leading-relaxed mb-6 font-sans">
                 {fortune}
               </p>
 
